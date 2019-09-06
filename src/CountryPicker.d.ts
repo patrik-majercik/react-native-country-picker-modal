@@ -387,6 +387,10 @@ export interface CountryPickerProps {
    */
   showCountryNameWithFlag?: boolean
   /**
+   * List of custom CCA2 countries to be also on start of the list
+   */
+  priorityCountries?: CCA2Code[]
+  /**
    * If 'filterable={true}' and renderFilter function is provided, render custom filter component.*
    */
   renderFilter?: (args: {

@@ -202,15 +202,14 @@ const darkTheme = StyleSheet.create({
 | hideAlphabetFilter  | bool | false | If set to true, prevents the alphabet filter rendering
 | showCountryNameWithFlag   | bool  | false | If set, then country name will appear next to flag in the view
 | showCallingCode | bool | false | If set to true, Country Picker List will show calling code after country name `United States (+1)`
-| renderFilter  | Function | undefined | If 'filterable={true}' and renderFilter function is provided, render custom filter component.\*
-
-\* 
+| renderFilter  | Function | undefined | If 'filterable={true}' and renderFilter function is provided, render custom filter component.
+| excludeCountries  | array | [] | List of custom CCA2 countries to be also on start of the list
 ```js
 renderFilter = ({value, onChange, onClose}) => (
   <CustomFilterComponent
      value={value}
      onChange={onChange}
-     onClose={onClose} 
+     onClose={onClose}
    />
 )
 ```

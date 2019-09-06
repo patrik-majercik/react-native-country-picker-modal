@@ -82,7 +82,8 @@ export default class CountryPicker extends Component {
     renderFilter: PropTypes.func,
     showCallingCode: PropTypes.bool,
     filterOptions: PropTypes.object,
-    showCountryNameWithFlag: PropTypes.bool
+    showCountryNameWithFlag: PropTypes.bool,
+    priorityCountries: PropTypes.array
   }
 
   static defaultProps = {
@@ -93,7 +94,8 @@ export default class CountryPicker extends Component {
     filterPlaceholder: 'Filter',
     autoFocusFilter: true,
     transparent: false,
-    animationType: 'none'
+    animationType: 'none',
+    priorityCountries: []
   }
 
   static renderEmojiFlag(cca2, emojiStyle) {
@@ -252,7 +254,7 @@ componentDidUpdate (prevProps) {
     const translation = optionalTranslation || this.props.translation || 'eng'
     return country.name[translation] || country.name.common
   }
-  
+
   getCallingCode(country) {
     return country.callingCode
   }
@@ -368,6 +370,12 @@ componentDidUpdate (prevProps) {
     )
   }
 
+  renderHeader = () =>
+    !this.state.filter &&
+    this.props.priorityCountries.map((c) => (
+      <View key={c}>{this.renderCountry(c)}</View>
+    ))
+
   renderFilter = () => {
     const {
       renderFilter,
@@ -448,6 +456,7 @@ componentDidUpdate (prevProps) {
                   ref={flatList => (this._flatList = flatList)}
                   initialNumToRender={30}
                   onScrollToIndexFailed={()=>{}}
+                  ListHeaderComponent={this.renderHeader}
                   renderItem={country => this.renderCountry(country.item.key)}
                   keyExtractor={(item) => item.key}
                   getItemLayout={(data, index) => (
